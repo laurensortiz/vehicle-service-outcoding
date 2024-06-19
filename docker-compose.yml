@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27018:27017
+    networks:
+      - app-network
+
+  app:
+    build: .
+    ports:
+      - 3001:3000
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/nest
+    networks:
+      - app-network
+
+  tests:
+    build: .
+    command: npm run test
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/nest
+    networks:
+      - app-network
+
+networks:
+  app-network:
