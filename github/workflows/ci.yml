@@ -25,4 +25,4 @@ jobs:
       - run: npm run test
       - run: npm run build
       - name: Build Docker image
-        run: docker build . -t vehicle-service
+        run: docker build . -t vehicle-service-outcoding
